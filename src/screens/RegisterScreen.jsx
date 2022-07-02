@@ -1,14 +1,22 @@
-import { View, Text,TextInput,Button,TouchableOpacity,StyleSheet } from 'react-native'
-import React from "react";
-import { useState } from 'react'
+import {
+  View,
+  Text,
+  TextInput,
+  Button,
+  TouchableOpacity,
+  StyleSheet,
+} from "react-native";
+import React, { useContext } from "react";
+import { useState } from "react";
+import { AuthContext } from "../context/AuthContext";
 
 const RegisterScreen = () => {
+  const [email, setEmail] = useState(null);
+  const [password, setPassword] = useState(null);
+  const [name, setName] = useState(null);
 
-  const [email,setEmail] = useState(null);
-  const [password,setPassword] = useState(null);
-  const [name,setName] = useState(null);
+  const register = useContext(AuthContext);
 
-  console.log({email:email, password:password});
   return (
     <View style={styles.container}>
       <View style={styles.wrapper}>
@@ -31,7 +39,9 @@ const RegisterScreen = () => {
           secureTextEntry
           onChangeText={(password) => setPassword(password)}
         />
-        <Button title="Login" />
+        <Button title="Register" onPress={()=>{
+          register(name,email,password)
+        }} />
         <View style={{ flexDirection: "row", marginTop: 20 }}>
           <Text>Already have an account? </Text>
           <TouchableOpacity onPress={() => navigation.navigate("Login")}>
