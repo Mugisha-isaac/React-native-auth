@@ -15,7 +15,7 @@ const RegisterScreen = () => {
   const [password, setPassword] = useState(null);
   const [name, setName] = useState(null);
 
-  const register = useContext(AuthContext);
+  const {register} = useContext(AuthContext);
 
   return (
     <View style={styles.container}>
