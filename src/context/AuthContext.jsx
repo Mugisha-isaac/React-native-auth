@@ -29,9 +29,24 @@ export const AuthProvider = ({ children }) => {
       });
   };
 
+
+  const login = (email,password)=>{
+    setIsLoading(true);
+
+    axios.post(`${BASE_URL}/login`,{email,password}).then(res=>{
+      let userInfo = res.data;
+      console.log(userInfo)
+      setUserInfo(userInfo);
+      AsyncStorage.setItem('userInfo', JSON.stringify(userInfo));
+      setIsLoading(false);
+    }).catch(err=>{
+      console.log(`Login error ${err}`);
+      setIsLoading(false);
+    });
+  }
   
 
   return (
-    <AuthContext.Provider value={{register,isLoading,userInfo}}>{children}</AuthContext.Provider>
+    <AuthContext.Provider value={{register,login,isLoading,userInfo}}>{children}</AuthContext.Provider>
   );
 };

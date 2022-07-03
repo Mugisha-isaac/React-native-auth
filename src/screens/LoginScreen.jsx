@@ -9,16 +9,17 @@ import {
 import React, { useContext } from "react";
 import { useState } from "react";
 import { AuthContext } from "../context/AuthContext";
+import {ActivityIndicator} from 'react-native'
 
 const LoginScreen = ({ navigation }) => {
   const [email, setEmail] = useState(null);
   const [password, setPassword] = useState(null);
-  const val = useContext(AuthContext);
+  const {login,isLoading} = useContext(AuthContext);
 
   return (
     <View style={styles.container}>
+      {isLoading && (<ActivityIndicator size="large" color="#2D96F3" />)}
       <View style={styles.wrapper}>
-        {/* <Text>{val}</Text> */}
         <TextInput
           placeholder="Enter email"
           value={email}
@@ -32,7 +33,9 @@ const LoginScreen = ({ navigation }) => {
           secureTextEntry
           onChangeText={(password) => setPassword(password)}
         />
-        <Button title="Login" />
+        <Button title="Login" onPress={()=>{
+          login(email,password)
+        }} />
         <View style={{ flexDirection: "row", marginTop: 20 }}>
           <Text>Don't have an account? </Text>
           <TouchableOpacity onPress={() => navigation.navigate("Register")}>
