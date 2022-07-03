@@ -18,7 +18,7 @@ const LoginScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <View style={styles.wrapper}>
-        <Text>{val}</Text>
+        {/* <Text>{val}</Text> */}
         <TextInput
           placeholder="Enter email"
           value={email}

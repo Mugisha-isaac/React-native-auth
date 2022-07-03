@@ -24,10 +24,12 @@ export const AuthProvider = ({ children }) => {
         setIsLoading(false);
       })
       .catch((e) => {
-        console.log(`registration error ${e}`);
         setIsLoading(false);
+        console.log(`registration error ${e}`);
       });
   };
+
+  
 
   return (
     <AuthContext.Provider value={{register,isLoading,userInfo}}>{children}</AuthContext.Provider>

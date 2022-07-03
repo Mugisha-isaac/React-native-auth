@@ -6,19 +6,21 @@ import {
   TouchableOpacity,
   StyleSheet,
 } from "react-native";
-import React, { useContext } from "react";
-import { useState } from "react";
+import React from "react";
+import { useState,useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
+import {ActivityIndicator} from 'react-native'
 
 const RegisterScreen = () => {
   const [email, setEmail] = useState(null);
   const [password, setPassword] = useState(null);
   const [name, setName] = useState(null);
 
-  const {register} = useContext(AuthContext);
+  const {register,isLoading} = useContext(AuthContext);
 
   return (
     <View style={styles.container}>
+      {isLoading && (<ActivityIndicator size="large" color="#2D96F3" />)}
       <View style={styles.wrapper}>
         <TextInput
           placeholder="Enter Name"
